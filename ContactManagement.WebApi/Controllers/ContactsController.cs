@@ -1,4 +1,5 @@
 ﻿using ContactManagement.BusinessLogic.Interfaces;
+using ContactManagement.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContactManagement.WebApi.Controllers
@@ -18,6 +19,16 @@ namespace ContactManagement.WebApi.Controllers
         {
             return Ok(_ContactService.GetContacts());
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddContactAsync([FromBody] ContactRequest contactRequest)
+        {
+           var contact = await _ContactService.AddContactsAsync(contactRequest);
+
+            return Ok(contact);
+
+        }
+
 
     }
 }

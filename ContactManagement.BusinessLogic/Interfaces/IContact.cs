@@ -5,5 +5,6 @@ namespace ContactManagement.BusinessLogic.Interfaces
     public interface IContact
     {
         IEnumerable<Contact> GetContacts();
+        Task<Contact> AddContactsAsync(ContactRequest contactRequest);
     }
 }
