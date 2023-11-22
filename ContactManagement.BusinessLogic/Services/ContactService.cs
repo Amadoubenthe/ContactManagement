@@ -18,6 +18,18 @@ namespace ContactManagement.BusinessLogic.Services
             return _DbContext.Contacts.ToList();
         }
 
+        public async Task<Contact> GetContactAsync(Guid id)
+        {
+            var contact = await _DbContext.Contacts.FindAsync(id);
+
+            if (contact == null)
+            {
+                return null;
+            }
+
+            return contact;
+        }
+
         public async Task<Contact> AddContactsAsync(ContactRequest contactRequest)
         {
             Contact contact = new Contact()

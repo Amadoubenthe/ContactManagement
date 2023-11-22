@@ -20,6 +20,20 @@ namespace ContactManagement.WebApi.Controllers
             return Ok(_ContactService.GetContacts());
         }
 
+        [HttpGet]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> Get([FromRoute] Guid id)
+        {
+            var contact = await _ContactService.GetContactAsync(id);
+
+            if (contact == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(contact);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddContactAsync([FromBody] ContactRequest contactRequest)
         {
