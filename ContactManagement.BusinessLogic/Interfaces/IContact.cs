@@ -6,5 +6,6 @@ namespace ContactManagement.BusinessLogic.Interfaces
     {
         IEnumerable<Contact> GetContacts();
         Task<Contact> AddContactsAsync(ContactRequest contactRequest);
+        Task<Contact> UpdateContactsAsync(Guid id, UpdateContactRequest updateContactRequest);
     }
 }

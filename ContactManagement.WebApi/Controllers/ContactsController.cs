@@ -29,6 +29,20 @@ namespace ContactManagement.WebApi.Controllers
 
         }
 
+        [HttpPut]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> UpdateContact([FromRoute] Guid id, [FromBody] UpdateContactRequest updateContactRequest)
+        {
+            var contact = await _ContactService.UpdateContactsAsync(id, updateContactRequest);
+
+            if (contact == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(contact);
+        }
+
 
     }
 }

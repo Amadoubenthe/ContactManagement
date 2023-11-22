@@ -2,7 +2,6 @@
 using ContactManagement.BusinessLogic.Interfaces;
 using ContactManagement.DataAccess.Data;
 using ContactManagement.DataAccess.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace ContactManagement.BusinessLogic.Services
 {
@@ -35,6 +34,26 @@ namespace ContactManagement.BusinessLogic.Services
             await _DbContext.SaveChangesAsync();
 
             return contact;
+        }
+
+        public async Task<Contact> UpdateContactsAsync(Guid id, UpdateContactRequest updateContactRequest)
+        {
+            var contact = await _DbContext.Contacts.FindAsync(id);
+
+            if (contact == null)
+            {
+                return null;
+            }
+
+            contact.Name = updateContactRequest.Name;
+            contact.Email = updateContactRequest.Email;
+            contact.Address = updateContactRequest.Address;
+            contact.Phone = updateContactRequest.Phone;
+
+            await _DbContext.SaveChangesAsync();
+
+            return contact;
+            
         }
     }
 }
